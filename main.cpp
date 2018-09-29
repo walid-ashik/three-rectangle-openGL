@@ -77,12 +77,34 @@ void drawLinesBetweenYellowAndGreen(){
 void myDisplay()
 {
     glClear(GL_COLOR_BUFFER_BIT);
+    glColor3f(0.0f,1.0f,1.0f);
+    glBegin(GL_TRIANGLES);
+        glVertex3d(0.0,4.0,0.0);
+        glVertex3d(-2.0,0.0,0.0);
+        glVertex3d(2.0,0.0,0.0);
+    glEnd();
 
-    displayRed();
-    displayYellow();
-    displayGreen();
-    drawLinesBetweenRedAndYellow();
-    drawLinesBetweenYellowAndGreen();
+    glColor3f(1.0f,0.0f,1.0f);
+    glBegin(GL_TRIANGLES);
+        glVertex3d(0.0,6.0,0.0);
+        glVertex3d(-2.0,2.0,0.0);
+        glVertex3d(2.0,2.0,0.0);
+    glEnd();
+
+      glColor3f(1.0f,1.0f,0.0f);
+    glBegin(GL_TRIANGLES);
+        glVertex3d(0.0,8.0,0.0);
+        glVertex3d(-2.0,4.0,0.0);
+        glVertex3d(2.0,4.0,0.0);
+    glEnd();
+
+      glColor3f(0.0f,1.0f,0.0f);
+    glBegin(GL_LINES);
+        glVertex3d(0.0,0.0,0.0);
+        glVertex3d(0.0,-4.0,0.0);
+    glEnd();
+
+
 
     glFlush();
 }
@@ -91,7 +113,7 @@ int main()
 {
     glutInitDisplayMode(GLUT_SINGLE|GLUT_RGB);
     glutInitWindowSize(1080,720);
-    glutInitWindowPosition(400,200);
+    glutInitWindowPosition(400,000);
     glutCreateWindow("DEMO");
     init();
     glutDisplayFunc(myDisplay);

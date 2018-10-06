@@ -1,0 +1,202 @@
+/*
+ * GLUT Shapes Demo
+ *
+ * Written by Nigel Stewart November 2003
+ *
+ * This program is test harness for the sphere, cone
+ * and torus shapes in GLUT.
+ *
+ * Spinning wireframe and smooth shaded shapes are
+ * displayed until the ESC or q key is pressed.  The
+ * number of geometry stacks and slices can be adjusted
+ * using the + and - keys.
+ */
+#include<windows.h>
+#ifdef __APPLE__
+//#include <GLUT/glut.h>
+#else
+#include <GL/glut.h>
+#endif
+
+#include <stdlib.h>
+
+void init()
+{
+    glClearColor(0.0f,0.0f,0.0f,1.0f);
+    glOrtho(-40,40,-40,40,-40,40);
+}
+
+void displayRed(){
+    glColor3f(1.0f,0.0f,0.0f);
+    glBegin(GL_QUADS);
+        glVertex3d(6.0,6.0,0.0);
+        glVertex3d(6.0,2.0,0.0);
+        glVertex3d(2.0,2.0,0.0);
+        glVertex3f(2.0,6.0,0.0);
+    glEnd();
+}
+
+void displayYellow(){
+    glColor3f(1.0f,1.0f,0.0f);
+    glBegin(GL_QUADS);
+        glVertex3d(4.0,4.0,0.0);
+        glVertex3d(4.0,-4.0,0.0);
+        glVertex3d(-4.0,-4.0,0.0);
+        glVertex3f(-4.0,4.0,0.0);
+    glEnd();
+}
+
+void displayGreen(){
+
+    glColor3f(0.0f,1.0f,1.0f);
+    glBegin(GL_QUADS);
+        glVertex3d(0.0,0.0,0.0);
+        glVertex3d(0.0,-7.0,0.0);
+        glVertex3d(-7.0,-7.0,0.0);
+        glVertex3f(-7.0,0.0,0.0);
+    glEnd();
+}
+
+void drawLinesBetweenRedAndYellow(){
+    glColor3f(0.0f,0.0f,0.0f);
+    glBegin(GL_LINES);
+        glVertex3d(4.0,4.0,0.0);
+        glVertex3d(6.0,6.0,0.0);
+    glEnd();
+}
+
+void drawLinesBetweenYellowAndGreen(){
+
+    glColor3f(0.0f,0.0f,0.0f);
+    glBegin(GL_LINES);
+        glVertex3d(4.0,4.0,0.0);
+        glVertex3d(-7.0,-7.0,0.0);
+    glEnd();
+}
+
+void drawTreeLeafsLine(int fromX, int fromY, int toX, int toY){
+    glColor3f(0.0f,1.0f,1.0f);
+    glBegin(GL_LINES);
+        glVertex3d(fromX,fromY,0.0);
+        glVertex3d(toX,toY,0.0);
+    glEnd();
+}
+
+void drawTreeLog(){
+    glColor3f(0.0f,1.0f,1.0f);
+    glBegin(GL_QUADS);
+        glVertex3d(-21.0,0.0,0.0);
+        glVertex3d(-21.0,-20.0,0.0);
+        glVertex3d(-20.0,-20.0,0.0);
+        glVertex3f(-20.0,0.0,0.0);
+    glEnd();
+}
+
+void drawTriangle(int x1, int y1, int x2, int y2, int x3, int y3){
+    glColor3f(0.0f,1.0f,1.0f);
+    glBegin(GL_TRIANGLES);
+        glVertex3d(x1,y1,0.0);
+        glVertex3d(x2,y2,0.0);
+        glVertex3d(x3,y3,0.0);
+    glEnd();
+}
+
+void displayTree(){
+    drawTreeLog();
+
+    drawTreeLeafsLine(-20, 0, -10, 10);
+    drawTriangle(-10, 10, -10, 7, -13, 7);
+    drawTriangle(-13, 7, -13, 4, -16, 4);
+    drawTriangle(-16, 4, -16, 1, -19, 1);
+
+    drawTreeLeafsLine(-20, 0, -20, 15);
+    drawTriangle(-20, 15, -18,15, -20, 10);
+    drawTriangle(-20, 10, -18, 8, -20, 5);
+    drawTriangle(-20, 5, -18, 3, -20, 0);
+
+    drawTreeLeafsLine(-20, 0, -30, 10);
+    drawTriangle(-30, 10, -27, 7, -32, 7);
+    drawTriangle(-27, 7, -24, 4, -28, 4);
+    drawTriangle(-24, 4, -21, 1, -25, 1);
+
+}
+
+void drawQuads(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4){
+
+    glColor3f(0.0f,1.0f,1.0f);
+    glBegin(GL_QUADS);
+        glVertex3d(x1,y1,0.0);
+        glVertex3d(x2,y2,0.0);
+        glVertex3d(x3,y3,0.0);
+        glVertex3f(x4,y4,0.0);
+    glEnd();
+
+}
+
+drawWindow(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4){
+
+    glColor3f(0.01f,0.0f,1.0f);
+    glBegin(GL_QUADS);
+        glVertex3d(x1,y1,0.0);
+        glVertex3d(x2,y2,0.0);
+        glVertex3d(x3,y3,0.0);
+        glVertex3f(x4,y4,0.0);
+    glEnd();
+
+}
+
+void displayHouse(){
+    drawQuads(0, 10, -5, 0, 20, 0, 15, 10);
+    drawQuads(-3, 0, -3, -20, 18, -20, 18, 0);
+    drawWindow(11, -5, 11, -8, 15, -8, 15, -5);
+    drawWindow(0, -5, 0, -8, 4, -8, 4, -5);
+    drawWindow(6, -8, 6, -20, 8, -20, 8, -8);
+
+    glColor3f(0.0f,0.0f,0.0f);
+    glBegin(GL_LINES);
+        glVertex3d(0.0,-5.0,0.0);
+        glVertex3d(4.0,-8.0,0.0);
+    glEnd();
+
+    glColor3f(0.0f,0.0f,0.0f);
+    glBegin(GL_LINES);
+        glVertex3d(4.0,-5.0,0.0);
+        glVertex3d(0.0,-8.0,0.0);
+    glEnd();
+
+    glColor3f(0.0f,0.0f,0.0f);
+    glBegin(GL_LINES);
+        glVertex3d(11.0,-5.0,0.0);
+        glVertex3d(15.0,-8.0,0.0);
+    glEnd();
+
+     glColor3f(0.0f,0.0f,0.0f);
+    glBegin(GL_LINES);
+        glVertex3d(15.0,-5.0,0.0);
+        glVertex3d(11.0,-8.0,0.0);
+    glEnd();
+
+}
+
+void myDisplay()
+{
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    //...tree drawing
+    displayTree();
+    displayHouse();
+
+    glFlush();
+}
+
+int main()
+{
+    glutInitDisplayMode(GLUT_SINGLE|GLUT_RGB);
+    glutInitWindowSize(1080,720);
+    glutInitWindowPosition(100,0);
+    glutCreateWindow("DEMO");
+    init();
+    glutDisplayFunc(myDisplay);
+    glutMainLoop();
+    return 0;
+}

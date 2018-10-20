@@ -1,0 +1,60 @@
+#include<GL\glut.h>
+#include <stdlib.h>
+#include <math.h>
+#include <windows.h>
+void init(void)
+{
+    //...window color
+	glClearColor(0.0, 0.0, 0.0, 0.0);
+    glMatrixMode(GL_PROJECTION);
+    glOrtho(-10,10,-10,10,-10,10);
+}
+
+
+
+void drawCircle()
+{
+    //...circle color
+	glColor3f(1.0, .60, 0.0);
+    glBegin(GL_POLYGON);
+        for(int i=1;i<360;i++)
+        {
+            glVertex2f(0+3*cos(3.14159*i/180),0+3*sin(3.14159*i/180));
+        }
+    glEnd();
+
+}
+void displayGreen(){
+
+    glColor3f(0.0f,1.0f,1.0f);
+    glBegin(GL_QUADS);
+        glVertex3d(-7.0,5.0,0.0);
+        glVertex3d(5.0,5.0,0.0);
+        glVertex3d(5.0,-5.0,0.0);
+        glVertex3f(-7.0,-5.0,0.0);
+    glEnd();
+}
+
+void myDisplay(void)
+{
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    displayGreen();
+    drawCircle();
+
+    glFlush();
+
+}
+
+int main(int argc, char** argv)
+{
+	glutInit(&argc, argv);
+	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+	glutInitWindowPosition(0, 0);
+	//glutInitWindowSize(900, 500);
+	glutInitWindowSize(500, 500);
+	glutCreateWindow("House Section OpenGL");
+	init();
+	glutDisplayFunc(myDisplay);
+	glutMainLoop();
+}
